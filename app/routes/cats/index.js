@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const { validationResult } = require('express-validator');
-const { BadRequest } = require('http-errors');
 const { list } = require('../../services/cats');
 
 const router = Router();
@@ -14,7 +13,7 @@ router.get(
     try {
       validationResult(req).throw();
     } catch (errors) {
-      throw new BadRequest({ errors: errors.array() });
+      res.status(404).json(errors.array());
     }
 
     const result = await list();

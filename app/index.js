@@ -12,6 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const catsRouter = require('./routes/cats');
+const votesRouter = require('./routes/votes');
 
 const app = express();
 
@@ -22,11 +23,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/cats', catsRouter);
-
-const dbURL = 'mongodb://localhost:27017/catmash';
+app.use('/votes', votesRouter);
 
 if (process.env.NODE_ENV !== 'test') {
-  mongoose.connect(dbURL, {
+  mongoose.connect(process.env.dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
