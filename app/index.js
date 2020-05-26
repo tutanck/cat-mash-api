@@ -4,9 +4,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { blue, green, redBright } = require('chalk');
+const { blue, green } = require('chalk');
 const Cat = require('./models/Cat');
 const data = require('../public/data.json');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const catsRouter = require('./routes/cats');
 
 const app = express();
 
@@ -15,6 +20,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use('/cats', catsRouter);
 
 const dbURL = 'mongodb://localhost:27017/catmash';
 
@@ -35,14 +42,9 @@ if (process.env.NODE_ENV !== 'test') {
 
     const catList = await Cat.find();
 
-    if (catList.length !== 0) {
-      console.log(redBright('[Warning] : Database was not empty !'));
-      return;
+    if (catList.length === 0) {
+      await Cat.insertMany(data.images.map((cat) => new Cat(cat).toJSON()));
     }
-
-    const catImages = data.images;
-
-    await Cat.insertMany(catImages.map((cat) => new Cat(cat).toJSON()));
 
     app.listen(process.env.PORT);
     console.log(blue(`Express ready !`));
