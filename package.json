@@ -1,0 +1,22 @@
+{
+  "name": "catmash-api",
+  "version": "1.0.0",
+  "description": "Cat Mash",
+  "main": "app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^4.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "load-json-file": "^6.2.0",
+    "mongoose": "^5.9.16",
+    "morgan": "^1.10.0"
+  }
+}
