@@ -9,4 +9,10 @@ const list = async () => {
   return enrichedCatList;
 };
 
-module.exports = { list };
+const match = async () => {
+  const fightingCats = Cat.aggregate([{ $sample: { size: 2 } }]);
+
+  return fightingCats;
+};
+
+module.exports = { list, match };
