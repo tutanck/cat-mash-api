@@ -1,9 +1,12 @@
+const { enrichCatList } = require('./enrich');
 const Cat = require('../../models/Cat');
 
 const list = async () => {
-  const cats = await Cat.find();
+  const catList = await Cat.find();
 
-  return cats;
+  const enrichedCatList = await enrichCatList(catList);
+
+  return enrichedCatList;
 };
 
 module.exports = { list };
