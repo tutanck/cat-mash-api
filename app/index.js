@@ -26,7 +26,7 @@ app.use('/cats', catsRouter);
 app.use('/votes', votesRouter);
 
 if (process.env.NODE_ENV !== 'test') {
-  mongoose.connect(process.env.dbURL, {
+  mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
