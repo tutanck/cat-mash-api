@@ -22,7 +22,7 @@ router.post(
     const result = await addVoteForCat(catId, Number(vote));
 
     return res.status(200).json(result);
-  }
+  },
 );
 
 module.exports = router;
