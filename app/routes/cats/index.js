@@ -18,7 +18,7 @@ router.get(
 
     const result = await list();
     return res.status(200).json(result);
-  }
+  },
 );
 
 router.get(
@@ -35,7 +35,7 @@ router.get(
 
     const result = await match();
     return res.status(200).json(result);
-  }
+  },
 );
 
 module.exports = router;
